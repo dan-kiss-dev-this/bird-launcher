@@ -20,6 +20,13 @@ const Wrapper = styled.div`
 `
 
 export default function Home() {
+  const onLaunch = (e) => {
+    // const background = document.getElementById('background')
+    // // const back
+    // console.log(25, background.style.width)
+    console.log(24, e)
+    console.log(28, window)
+  }
   return (
     <>
       <Head>
@@ -29,7 +36,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Wrapper>
+      <Wrapper onClick={onLaunch} id="background">
         <Bird x={50} y={50}></Bird>
       </Wrapper>
 
