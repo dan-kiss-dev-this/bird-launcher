@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import styled from 'styled-components'
 
-
+import Bird from '@/components/Bird'
 
 const Wrapper = styled.div`
+  position: relative;
   height: 405px;
   width: 720px;
   margin: 60px auto;
@@ -28,9 +29,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        <Wrapper>
-        </Wrapper>
-    
+      <Wrapper>
+        <Bird x={50} y={50}></Bird>
+      </Wrapper>
+
     </>
   )
 }
