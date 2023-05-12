@@ -21,7 +21,14 @@ const Wrapper = styled.div`
 
 export default function Home() {
   const onLaunch = (e) => {
+    const leftOffset = window.innerWidth;
+    const topOffset = window.innerHeight;
+
+
     // const background = document.getElementById('background')
+
+    //e.pageX
+    //e.pageY
     // // const back
     // console.log(25, background.style.width)
     console.log(24, e)
