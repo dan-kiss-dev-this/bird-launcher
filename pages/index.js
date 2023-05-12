@@ -1,7 +1,8 @@
-import Head from 'next/head'
-import styled from 'styled-components'
+import { useState } from "react";
+import Head from "next/head";
+import styled from "styled-components";
 
-import Bird from '@/components/Bird'
+import Bird from "@/components/Bird";
 
 const Wrapper = styled.div`
   position: relative;
@@ -12,28 +13,30 @@ const Wrapper = styled.div`
   background-size: contain;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.45) 1px 1px 6px;
+  pointer: cursor;
+
   @media (max-width: 720px) {
-    width:100vw;
+    width: 100vw;
     height: 56.25vw;
     border-radius: 0;
   }
-`
+`;
 
 export default function Home() {
+  const [x, setX] = useState(50);
+  const [y, setY] = useState(50);
+
   const onLaunch = (e) => {
-    const leftOffset = window.innerWidth;
-    const topOffset = window.innerHeight;
+    const leftOffset = (window.innerWidth - e.target.clientWidth) / 2;
+    const topOffset = 60;
 
+    const xval = e.pageX - leftOffset;
+    const yval = Math.abs(e.pageY - topOffset - e.target.clientHeight);
+    setX(xval);
+    setY(yval);
 
-    // const background = document.getElementById('background')
-
-    //e.pageX
-    //e.pageY
-    // // const back
-    // console.log(25, background.style.width)
-    console.log(24, e)
-    console.log(28, window)
-  }
+    console.log("x, y", x, y);
+  };
   return (
     <>
       <Head>
@@ -45,8 +48,19 @@ export default function Home() {
 
       <Wrapper onClick={onLaunch} id="background">
         <Bird x={50} y={50}></Bird>
+        <div
+          style={{
+            position: "absolute",
+            padding: "16px",
+            top: "-60px",
+            left: 0,
+            fontSize: "32px",
+            color: "#fff",
+          }}
+        >
+          {Math.floor(x)},{""} {Math.floor(y)}
+        </div>
       </Wrapper>
-
     </>
-  )
+  );
 }
