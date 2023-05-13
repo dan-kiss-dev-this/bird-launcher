@@ -14,6 +14,23 @@ const Wrapper = styled.div`
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.45) 1px 1px 6px;
   pointer: cursor;
+  overflow: hidden;
+
+  & .flying-bird {
+    animation: launchBird 2s 1 linear;
+  }
+
+  @keyframes launchBird {
+    0% {
+      transform: translate(0px, 0px);
+    }
+    100% {
+      transform: translate(
+        ${(props) => props.birdTargetX}px,
+        -${(props) => props.birdTargetY}px
+      );
+    }
+  }
 
   @media (max-width: 720px) {
     width: 100vw;
@@ -23,8 +40,16 @@ const Wrapper = styled.div`
 `;
 
 export default function Home() {
+  const [isBirdFlying, setIsBirdFlying] = useState(false);
+
+  const [birdx, setBirdX] = useState(50);
+  const [birdy, setBirdY] = useState(50);
+
   const [x, setX] = useState(50);
   const [y, setY] = useState(50);
+
+  const [birdTargetX, setBirdTargetX] = useState(null);
+  const [birdTargetY, setBirdTargetY] = useState(null);
 
   const onLaunch = (e) => {
     const leftOffset = (window.innerWidth - e.target.clientWidth) / 2;
@@ -35,8 +60,25 @@ export default function Home() {
     setX(xval);
     setY(yval);
 
-    console.log("x, y", x, y);
+    const slope = (yval - birdy) / (xval - birdx);
+    const angle = Math.atan(slope);
+    const xdist = 2400 * Math.cos(angle);
+    const ydist = 1800 * Math.sin(angle);
+
+    setBirdTargetX(xdist);
+    setBirdTargetY(ydist);
+
+    if (xval > 0 && yval > 0) {
+      setIsBirdFlying(true);
+    }
+
+    if (!isBirdFlying) {
+      setTimeout(() => {
+        setIsBirdFlying(false);
+      }, 2000);
+    }
   };
+
   return (
     <>
       <Head>
@@ -46,8 +88,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Wrapper onClick={onLaunch} id="background">
-        <Bird x={50} y={50}></Bird>
+      <Wrapper
+        onClick={onLaunch}
+        id="background"
+        birdTargetX={birdTargetX}
+        birdTargetY={birdTargetY}
+      >
+        <Bird x={birdx} y={birdy} isBirdFlying={isBirdFlying}></Bird>
         <div
           style={{
             position: "absolute",

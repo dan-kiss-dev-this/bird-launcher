@@ -13,8 +13,17 @@ const Wrapper = styled.img`
   user-select: none; /* Standard */
 `;
 
-const Bird = ({ x = 50, y = 0 }) => {
-  return <Wrapper x={x} y={y} src="/images/RedBird.png" />;
+const Bird = ({ x = 50, y = 0, isBirdFlying, birdTargetX, birdTargetY }) => {
+  return (
+    <Wrapper
+      x={x}
+      y={y}
+      birdTargetX={birdTargetX}
+      birdTargetY={birdTargetY}
+      src="/images/RedBird.png"
+      className={isBirdFlying ? "flying-bird" : ""}
+    />
+  );
 };
 
 export default Bird;
