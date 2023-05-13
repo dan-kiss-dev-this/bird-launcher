@@ -39,15 +39,11 @@ const Wrapper = styled.div`
   }
 `;
 
+const birdx = 50;
+const birdy = 50;
+
 export default function Home() {
   const [isBirdFlying, setIsBirdFlying] = useState(false);
-
-  const [birdx, setBirdX] = useState(50);
-  const [birdy, setBirdY] = useState(50);
-
-  const [x, setX] = useState(50);
-  const [y, setY] = useState(50);
-
   const [birdTargetX, setBirdTargetX] = useState(null);
   const [birdTargetY, setBirdTargetY] = useState(null);
 
@@ -55,20 +51,19 @@ export default function Home() {
     const leftOffset = (window.innerWidth - e.target.clientWidth) / 2;
     const topOffset = 60;
 
-    const xval = e.pageX - leftOffset;
-    const yval = Math.abs(e.pageY - topOffset - e.target.clientHeight);
-    setX(xval);
-    setY(yval);
+    const xclick = e.pageX - leftOffset;
+    const yclick = Math.abs(e.pageY - topOffset - e.target.clientHeight);
 
-    const slope = (yval - birdy) / (xval - birdx);
+    const slope = (yclick - birdy) / (xclick - birdx);
     const angle = Math.atan(slope);
-    const xdist = 2400 * Math.cos(angle);
-    const ydist = 1800 * Math.sin(angle);
 
-    setBirdTargetX(xdist);
-    setBirdTargetY(ydist);
+    const xtarget = 2400 * Math.cos(angle);
+    const ytarget = 1800 * Math.sin(angle);
 
-    if (xval > 0 && yval > 0) {
+    setBirdTargetX(xtarget);
+    setBirdTargetY(ytarget);
+
+    if (xclick > 0 && yclick > 0) {
       setIsBirdFlying(true);
     }
 
@@ -95,7 +90,7 @@ export default function Home() {
         birdTargetY={birdTargetY}
       >
         <Bird x={birdx} y={birdy} isBirdFlying={isBirdFlying}></Bird>
-        <div
+        {/* <div
           style={{
             position: "absolute",
             padding: "16px",
@@ -106,7 +101,7 @@ export default function Home() {
           }}
         >
           {Math.floor(x)},{""} {Math.floor(y)}
-        </div>
+        </div> */}
       </Wrapper>
     </>
   );
