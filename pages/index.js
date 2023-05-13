@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   background-size: contain;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.45) 1px 1px 6px;
-  pointer: cursor;
+  cursor: pointer;
   overflow: hidden;
 
   & .flying-bird {
