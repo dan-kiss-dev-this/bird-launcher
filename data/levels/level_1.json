@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "cordX": 170,
+        "cordY": 170,
+        "sizeX": 1,
+        "sizeY": 10,
+        "type": "TNT"
+    },
+    {
+        "id": 2,
+        "cordX": 250,
+        "cordY": 250,
+        "sizeX": 1,
+        "sizeY": 10,
+        "type": "TNT"
+    },
+    {
+        "id": 3,
+        "cordX": 350,
+        "cordY": 150,
+        "sizeX": 1,
+        "sizeY": 10,
+        "type": "TNT"
+    }
+]

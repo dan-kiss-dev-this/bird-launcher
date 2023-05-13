@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Head from "next/head";
 import styled from "styled-components";
+import gameLevel from '../data/levels/level_1.json';
 
 import Bird from "@/components/Bird";
+import Block from "@/components/Block";
 
 const Wrapper = styled.div`
   position: relative;
@@ -23,6 +25,15 @@ const Wrapper = styled.div`
 
   & .flying-bird {
     animation: launchBird 2s 1 linear;
+  }
+
+  & .overlay {
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   @keyframes launchBird {
@@ -94,19 +105,10 @@ export default function Home() {
         birdTargetX={birdTargetX}
         birdTargetY={birdTargetY}
       >
+        <div className="overlay" />
         <Bird x={birdx} y={birdy} isBirdFlying={isBirdFlying}></Bird>
-        {/* <div
-          style={{
-            position: "absolute",
-            padding: "16px",
-            top: "-60px",
-            left: 0,
-            fontSize: "32px",
-            color: "#fff",
-          }}
-        >
-          {Math.floor(x)},{""} {Math.floor(y)}
-        </div> */}
+        {gameLevel.map((rock, index) => <Block cordX={rock.cordX} cordY={rock.cordY} key={rock.id} />)}
+
       </Wrapper>
     </>
   );
